@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: oldflux3-toolkit
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: helm
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: GitRepository
+        name: oldflux3
+  interval: 30s
+  targetNamespace: oldflux2
+  values:
+    image:
+      tag: 2.9.9
+    ingress:
+      host: oldflux3-toolkit.127.0.0.1:56388.nip.io
